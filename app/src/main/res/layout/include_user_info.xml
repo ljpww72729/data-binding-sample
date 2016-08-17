@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="user"
+            type="cc.lkme.databindingsample.model.UserInfo"/>
+        <variable
+            name="defaultAddress"
+            type="String"/>
+        <import type="android.view.View"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:text="@{user.name, default=lipeng}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/age"
+            android:text="@{user.age, default=28}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!--android:text="@{user.show}"因为show为boolean类型的,因此此处不可以如此设置,
+        需要强制转换为字符串类型的,如下所示,java.lang.*包中的内容会自动引入到xml中。-->
+        <TextView
+            android:id="@+id/show"
+            android:text="@{String.valueOf(user.show)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            tools:text="显示信息"
+            android:visibility="@{user.show ? View.VISIBLE:View.GONE}"/>
+
+        <TextView
+            android:id="@+id/address"
+            android:text="@{user.address ?? defaultAddress}"
+            tools:text="暂无地址信息"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/all_info"
+            tools:text="组合信息"
+            android:text="@{@string/all_info(user.name, user.age),default=组合信息}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</layout>

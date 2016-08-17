@@ -1,22 +1,24 @@
 package cc.lkme.databindingsample;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import cc.lkme.databindingsample.databinding.ActivityCrecyclerViewBinding;
+
 
 public class CRecyclerView extends AppCompatActivity {
 
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private String[] myDataset = {"a","b"};
+    private ArrayList<String> myDataset;
 
 
     @Override
@@ -34,28 +36,40 @@ public class CRecyclerView extends AppCompatActivity {
         binding.myRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
+        myDataset = new ArrayList<>();
+        myDataset.add("aa");
+        myDataset.add("bb");
+        myDataset.add("cc");
+        myDataset.add("dd");
         mAdapter = new MyAdapter(myDataset);
         binding.myRecyclerView.setAdapter(mAdapter);
     }
 
 
-    static class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-        private String[] mDataset;
+    static class MyAdapter<E> extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+        private ArrayList<E> mDataset;
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
         // you provide access to all the views for a data item in a view holder
         static class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
-            public TextView mTextView;
-            public ViewHolder(View v) {
-                super(v);
-                mTextView = (TextView) v.findViewById(R.id.item_text);
+            private ViewDataBinding binding;
+
+            public ViewHolder(ViewDataBinding binding) {
+                super(binding.getRoot());
+                this.binding = binding;
             }
+
+            public ViewDataBinding getBinding() {
+                return binding;
+            }
+
+
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)
-        public MyAdapter(String[] myDataset) {
+        public MyAdapter(ArrayList<E> myDataset) {
             mDataset = myDataset;
         }
 
@@ -64,14 +78,15 @@ public class CRecyclerView extends AppCompatActivity {
         public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                        int viewType) {
             // create a new view
-            View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_recycler_view, parent, false);
+//            View v = LayoutInflater.from(parent.getContext())
+//                    .inflate(R.layout.item_recycler_view, parent, false);
 
-//            ItemRecyclerViewBinding binding = ItemRecyclerViewBinding.
+            //data binding
+            ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_recycler_view, parent, false);
 
             // set the view's size, margins, paddings and layout parameters
 
-            ViewHolder vh = new ViewHolder(v);
+            ViewHolder vh = new ViewHolder(binding);
             return vh;
         }
 
@@ -80,14 +95,15 @@ public class CRecyclerView extends AppCompatActivity {
         public void onBindViewHolder(ViewHolder holder, int position) {
             // - get element from your dataset at this position
             // - replace the contents of the view with that element
-            holder.mTextView.setText(mDataset[position]);
-
+            final E item = mDataset.get(position);
+            holder.getBinding().setVariable(cc.lkme.databindingsample.BR.item, item);
+            holder.getBinding().executePendingBindings();
         }
 
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
-            return mDataset.length;
+            return mDataset.size();
         }
     }
 
