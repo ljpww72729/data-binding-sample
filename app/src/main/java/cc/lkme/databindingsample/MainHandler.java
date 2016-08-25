@@ -87,4 +87,12 @@ public class MainHandler {
             }
         }).start();
     }
+
+    /**
+     * 改变自定义Setter的值
+     * @param view
+     */
+    public void changeCustomColor(View view){
+        Toast.makeText(context, "改变自定义Setter的值", Toast.LENGTH_SHORT).show();
+    }
 }
