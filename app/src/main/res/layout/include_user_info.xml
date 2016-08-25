@@ -37,7 +37,7 @@
             android:text="@{String.valueOf(user.show)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
+            android:background="@{user.show ? @color/colorPrimary : @color/colorAccent}"
             tools:text="显示信息"
             android:visibility="@{user.show ? View.VISIBLE:View.GONE}"/>
 
@@ -54,6 +54,11 @@
             android:text="@{@string/all_info(user.name, user.age),default=组合信息}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="10dp"
+            android:background="@{user.show ? @color/colorPrimary : @color/colorAccent}"/>
 
     </LinearLayout>
 </layout>

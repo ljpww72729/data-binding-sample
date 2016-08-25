@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         binding.setUser(userInfo);
         //设置Handler
         binding.setHandlers(new MainHandler(this));
-//        binding.executePendingBindings();
         binding.recycleView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

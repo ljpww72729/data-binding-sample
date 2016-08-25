@@ -72,4 +72,19 @@ public class MainHandler {
         // ObservableField
        userInfo.age.set(String.valueOf(Integer.parseInt(userInfo.age.get())+ new Random().nextInt(10)));
     }
+    /**
+     * Observable Objects
+     * 检测对象的更改
+     */
+    public void changeObjectValueThread(final UserInfo userInfo){
+        //Observable Objects
+//       userInfo.setAge(String.valueOf(Integer.parseInt(userInfo.getAge())+ new Random().nextInt(10)));
+        // ObservableField
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userInfo.age.set(String.valueOf(Integer.parseInt(userInfo.age.get())+ new Random().nextInt(10)));
+            }
+        }).start();
+    }
 }
