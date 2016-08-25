@@ -41,13 +41,14 @@ public class CRecyclerView extends AppCompatActivity {
         myDataset.add("bb");
         myDataset.add("cc");
         myDataset.add("dd");
-        mAdapter = new MyAdapter(myDataset);
+        mAdapter = new MyAdapter(myDataset, R.layout.item_recycler_view);
         binding.myRecyclerView.setAdapter(mAdapter);
     }
 
 
     static class MyAdapter<E> extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         private ArrayList<E> mDataset;
+        private int item_layout;
 
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
@@ -69,8 +70,9 @@ public class CRecyclerView extends AppCompatActivity {
         }
 
         // Provide a suitable constructor (depends on the kind of dataset)
-        public MyAdapter(ArrayList<E> myDataset) {
+        public MyAdapter(ArrayList<E> myDataset, int item_layout) {
             mDataset = myDataset;
+            this.item_layout = item_layout;
         }
 
         // Create new views (invoked by the layout manager)
@@ -82,7 +84,7 @@ public class CRecyclerView extends AppCompatActivity {
 //                    .inflate(R.layout.item_recycler_view, parent, false);
 
             //data binding
-            ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_recycler_view, parent, false);
+            ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), item_layout, parent, false);
 
             // set the view's size, margins, paddings and layout parameters
 
