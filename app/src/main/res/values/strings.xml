@@ -2,4 +2,7 @@
     <string name="app_name">DataBindingSample</string>
     <string name="recycler_view_data_binding">Recycler View Data Binding</string>
     <string name="all_info">所有信息为%1$s,%2$s</string>
+    <string name="numberType">User NumberType</string>
+    <string name="badNumber">错误数据</string>
+    <string name="display_name">%1$s,%2$s</string>
 </resources>

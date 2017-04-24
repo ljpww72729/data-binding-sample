@@ -2,6 +2,9 @@ package cc.lkme.databindingsample.model;
 
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.graphics.Color;
+
+import cc.lkme.databindingsample.PhoneNumberType;
 
 /**
  * Created by LinkedME06 on 16/8/13.
@@ -59,10 +62,40 @@ import android.databinding.ObservableField;
 //
 //}
 
-public class UserInfo{
+public class UserInfo {
     public final ObservableField<String> name = new ObservableField<>();
     public final ObservableField<String> age = new ObservableField<>();
     public final ObservableField<String> address = new ObservableField<>();
     public final ObservableBoolean show = new ObservableBoolean();
+
+    public PhoneNumberType getNumberType() {
+        return numberType;
+    }
+
+    public void setNumberType(PhoneNumberType numberType) {
+        this.numberType = numberType;
+    }
+
+    private PhoneNumberType numberType = PhoneNumberType.PHONE;
+
+    public double getVal() {
+        return val;
+    }
+
+    public void setVal(double val) {
+        this.val = val;
+    }
+
+    private double val = 10.01;
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    private int color = Color.BLACK;
 
 }

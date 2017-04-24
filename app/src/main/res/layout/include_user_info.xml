@@ -4,7 +4,7 @@
 
     <data>
         <variable
-            name="user"
+            name="userInfo"
             type="cc.lkme.databindingsample.model.UserInfo"/>
         <variable
             name="defaultAddress"
@@ -19,31 +19,31 @@
 
         <EditText
             android:id="@+id/name"
-            android:text="@={user.name, default=lipeng}"
+            android:text="@={userInfo.name, default=lipeng}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
 
         <TextView
             android:id="@+id/age"
-            android:text="@{user.age, default=28}"
+            android:text="@{userInfo.age, default=28}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <!--android:text="@{user.show}"因为show为boolean类型的,因此此处不可以如此设置,
+        <!--android:text="@{userInfo.show}"因为show为boolean类型的,因此此处不可以如此设置,
         需要强制转换为字符串类型的,如下所示,java.lang.*包中的内容会自动引入到xml中。-->
         <TextView
             android:id="@+id/show"
-            android:text="@{String.valueOf(user.show)}"
+            android:text="@{String.valueOf(userInfo.show)}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@{user.show ? @color/colorPrimary : @color/colorAccent}"
+            android:background="@{userInfo.show ? @color/colorPrimary : @color/colorAccent}"
             tools:text="显示信息"
-            android:visibility="@{user.show ? View.VISIBLE:View.GONE}"/>
+            android:visibility="@{userInfo.show ? View.VISIBLE:View.GONE}"/>
 
         <TextView
             android:id="@+id/address"
-            android:text="@{user.address ?? defaultAddress}"
+            android:text="@{userInfo.address ?? defaultAddress}"
             tools:text="暂无地址信息"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -51,14 +51,14 @@
         <TextView
             android:id="@+id/all_info"
             tools:text="组合信息"
-            android:text="@{@string/all_info(user.name, user.age),default=组合信息}"
+            android:text="@{@string/all_info(userInfo.name, userInfo.age),default=组合信息}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <View
             android:layout_width="100dp"
             android:layout_height="10dp"
-            android:background="@{user.show ? @color/colorPrimary : @color/colorAccent}"/>
+            android:background="@{userInfo.show ? @color/colorPrimary : @color/colorAccent}"/>
 
     </LinearLayout>
 </layout>

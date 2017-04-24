@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import cc.lkme.databindingsample.databinding.ActivityMainBinding;
+import cc.lkme.databindingsample.model.DependentUser;
 import cc.lkme.databindingsample.model.UserInfo;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,8 +67,15 @@ public class MainActivity extends AppCompatActivity {
         userInfo.age.set("28");
         userInfo.show.set(true);
         userInfo.address.set("北京市");
-
         binding.setUser(userInfo);
+
+        //dependent properties
+        DependentUser dependentUser = new DependentUser(getResources());
+        dependentUser.setFirstName("jiao");
+        dependentUser.setLastName("wenwen");
+        dependentUser.setUserName("jww");
+        binding.setDependentUser(dependentUser);
+
         binding.getUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CRecyclerView.class));
             }
         });
+
     }
 
 }
